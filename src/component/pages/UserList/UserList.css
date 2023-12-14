@@ -1,0 +1,12 @@
+.table-wrapper {
+    margin-top: 20px;
+}
+.btn-row-wrapper{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.div-space{
+    margin: 0 10px !important;
+}
