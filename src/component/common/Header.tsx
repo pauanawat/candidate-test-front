@@ -36,7 +36,7 @@ const Header: React.FC<WithConnectProps & RouteComponentProps> = ({
         <AppBar position="static">
             <Toolbar>
                 <Typography>
-                    <Button component={Link} to="/users" color="inherit">
+                    <Button component={Link} to="/feeds" color="inherit">
                         <HomeIcon fontSize="large" />
                         Feed
                     </Button>

@@ -13,10 +13,7 @@ import {
 import "./PostList.css"
 import AlertMassage from '../../common/AlertMassage'
 import { responseStatus } from '../../../const/constant'
-import { IPost, IPostCreate, IPostUpdate } from '../../../store/post/postType'
-import { AppState } from '../../../store/rootReducer'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { selectUserId } from '../../../store/auth/authSelector'
+import { IPost, IPostCreate } from '../../../store/post/postType'
 
 interface dataProps {
     titlePage: string
@@ -62,7 +59,6 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
         body
     ])
     const editUser = async () => {
-        // let param:IPost = {}
         console.log("edit user")
         if ((!!id || !!body) &&
             !!userId &&
@@ -74,7 +70,7 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
             try {
                 if (id)
                     await post.updatePost(id, payload).then((res) => {
-                        if (res.data.message == "success") {
+                        if (res.data.message === "success") {
                             onClose()
                         }
                         else
@@ -83,7 +79,7 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
                 else {
                     payload['userId'] = userId
                     await post.createPost(payload).then((res) => {
-                        if (res.data.message == "success") {
+                        if (res.data.message === "success") {
                             onClose()
                         }
                         else

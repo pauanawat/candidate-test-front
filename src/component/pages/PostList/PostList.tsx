@@ -1,29 +1,18 @@
-// PostList.tsx
-import React, { useEffect, useState } from 'react'
-import { post } from '../../../apis/api' // Import your authentication API instance
+import React, { useState } from 'react'
+import { post } from '../../../apis/api'
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Typography,
     Button,
     TextField,
     Grid,
     IconButton,
-    Alert
 } from '@mui/material'
-import VisibilityIcon from '@mui/icons-material/Visibility'
 import EditIcon from '@mui/icons-material/Edit'
 import "./PostList.css"
-import { IPostUpdate, IPost, IPostFilter } from '../../../store/post/postType'
+import { IPost, IPostFilter } from '../../../store/post/postType'
 import ModalEditPost from './ModalEditPost'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModalDeletePost from './ModalDeletePost'
-import { green } from '@mui/material/colors';
-import Icon from '@mui/material/Icon';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 const PostList: React.FC = () => {
     const [posts, setPost] = useState<IPost[]>([])
@@ -31,7 +20,7 @@ const PostList: React.FC = () => {
     const [selectedPost, setSelectedPost] = useState<IPost>()
     const [selectedPostDelete, setSelectedPostDelete] = useState<IPost>()
     const [filterId, setFilterId] = useState<number | null>(null)
-    const [filterUserId, setFilterUserId] = useState<number| null>(null)
+    const [filterUserId, setFilterUserId] = useState<number | null>(null)
     const [filterTitle, setFilterTitle] = useState<string>('')
     const [filterBody, setFilterBody] = useState<string>('')
 
@@ -125,14 +114,14 @@ const PostList: React.FC = () => {
                     </div>
                 </Grid>
             </Grid>
-            <Container className='table-wrapper'>
+            <div className='table-wrapper'>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center">ID</TableCell>
-                                <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">UserId</TableCell>
+                                <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">Body</TableCell>
                                 <TableCell align="center">Action</TableCell>
                             </TableRow>
@@ -158,7 +147,7 @@ const PostList: React.FC = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Container>
+            </div>
             {openModalCreate && !selectedPost
                 ? <ModalEditPost titlePage="Add Post" data={selectedPost} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
                 : <ModalEditPost titlePage="Edit Post Profile" isOpen={openModalCreate} data={selectedPost} onClose={handleCloseModal} />
