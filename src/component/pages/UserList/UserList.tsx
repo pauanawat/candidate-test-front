@@ -125,7 +125,7 @@ const UserList: React.FC = () => {
                     </div>
                 </Grid>
             </Grid>
-            <Container className='table-wrapper'>
+            <div className='table-wrapper'>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -161,7 +161,7 @@ const UserList: React.FC = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Container>
+            </div>
             {openModalCreate && !selectedUser
                 ? <ModalEditUser title="Add User" data={selectedUser} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
                 : <ModalEditUser title="Edit User Profile" isOpen={openModalCreate} data={selectedUser} onClose={handleCloseModal} />

@@ -10,11 +10,12 @@ import './App.css';
 import ScrollToTop from './ScrollToTop';
 import Header from './common/Header';
 import UserList from './pages/UserList/UserList';
-import Login from './pages/User/Login';
+import Login from './pages/Login/Login';
 import PostList from './pages/PostList/PostList';
 import { Container } from '@mui/material';
 import { AppState } from '../store/rootReducer';
 import { connect } from 'react-redux';
+import FeedList from './pages/Feed/FeedList';
 
 const mapState = (state: AppState) => ({
   auth: state.authReducer
@@ -37,6 +38,7 @@ const App: React.FC<WithConnectProps> = (props) => {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/feeds" component={FeedList} />
                   <Route exact path="/users" component={UserList} />
                   <Route exact path="/posts" component={PostList} />
                 </Switch>

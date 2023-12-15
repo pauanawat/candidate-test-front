@@ -1,10 +1,9 @@
-import Axios from 'axios'
 import {
   authApi,
   basicApi,
 } from './axios'
-import { IUser, IUserFilter, UpdateUserType, UserType } from '../store/user/userType'
-import { IPost, IPostCreate, IPostFilter, IPostUpdate } from '../store/post/postType'
+import { IUserFilter, UpdateUserType, UserType } from '../store/user/userType'
+import { IFeed, IPostCreate, IPostFilter, IPostUpdate } from '../store/post/postType'
 
 export const auth = {
   login: (
@@ -27,6 +26,9 @@ export const user = {
     authApi.delete(`/users/${id}`),
   getUserById: (id: number) =>
     authApi.get(`/users/${id}`),
+  getAllUser: () => {
+    return basicApi.get('/users/all')
+  },
   getUser: (data: IUserFilter) => {
     let query = "?"
     query = data.id ? query + "id=" + data.id.toString() : query
@@ -66,4 +68,10 @@ export const post = {
     console.log(query)
     return authApi.get('/posts' + query)
   },
+}
+export const feed = {
+  getFeedList: (userId?: number) => {
+    let query = userId ? "?userId=" + userId : ""
+    return basicApi.get('/feeds' + query)
+  }
 }
