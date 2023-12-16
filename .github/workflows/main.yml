@@ -1,0 +1,31 @@
+name: Deploy Front-end
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 16.13
+
+    - name: Log in to Heroku Registry
+      run: heroku container:login
+      env:
+        HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+
+    - name: Build and Push Docker Image
+      run: |
+        heroku container:push -a candidate-test-frontend web
+        heroku container:release -a candidate-test-frontend web
+      env:
+        HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
