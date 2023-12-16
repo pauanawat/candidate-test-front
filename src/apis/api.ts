@@ -2,8 +2,8 @@ import {
   authApi,
   basicApi,
 } from './axios'
-import { IUserFilter, UpdateUserType, UserType } from '../store/user/userType'
-import { IFeed, IPostCreate, IPostFilter, IPostUpdate } from '../store/post/postType'
+import { IUserFilter, UpdateUserType } from '../store/user/userType'
+import { IPostCreate, IPostFilter, IPostUpdate } from '../store/post/postType'
 
 export const auth = {
   login: (

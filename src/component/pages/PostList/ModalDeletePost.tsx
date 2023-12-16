@@ -1,18 +1,13 @@
 // UserList.tsx
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { user } from '../../../apis/api' // Import your authentication API instance
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container,
     Dialog,
     DialogTitle,
     DialogContent,
     DialogActions,
-    Typography,
     Button,
-    TextField,
-    Grid,
     DialogContentText,
-    Alert
 } from '@mui/material'
 import "./PostList.css"
 import { IPost } from '../../../store/post/postType'
@@ -27,7 +22,7 @@ const ModalDeleteUser: React.FC<dataProps> = ({ data, onClose }) => {
     const deleteUser = async () => {
         if (data && data.id) {
             user.deleteUser(data.id).then((res) => {
-                if (res.data.message == "success"){
+                if (res.data.message == "success") {
                     onClose()
                 }
             })
