@@ -12,17 +12,6 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 14
-
-    - name: Install dependencies
-      run: npm install 
-
-    - name: Build file
-      run: npm run build
         
     - name: Deploy to Netlify
       uses: South-Paw/action-netlify-deploy@v1.2.0
