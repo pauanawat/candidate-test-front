@@ -1,7 +1,7 @@
 // UserList.tsx
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
-import { AppBar, Toolbar, Button, Container, Box, Typography } from '@mui/material'
+import { AppBar, Toolbar, Button, Box, Typography } from '@mui/material'
 import { AppState } from '../../store/rootReducer'
 import { ThunkDispatch } from 'redux-thunk'
 import { AppActions } from '../../store/type'

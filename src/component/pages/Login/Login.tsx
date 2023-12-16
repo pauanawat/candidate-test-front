@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../store/auth/authAction';
 import { selectTokenData } from '../../../store/auth/authSelector';
-import { AuthActionType } from '../../../store/type';
 export interface LoginValues {
     email: string
     password: string

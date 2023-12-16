@@ -1,29 +1,19 @@
 // UserList.tsx
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { user } from '../../../apis/api' // Import your authentication API instance
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Typography,
     Button,
     TextField,
     Grid,
     IconButton,
-    Alert
 } from '@mui/material'
-import VisibilityIcon from '@mui/icons-material/Visibility'
 import EditIcon from '@mui/icons-material/Edit'
 import "./UserList.css"
 import { IUserFilter, UserType } from '../../../store/user/userType'
 import ModalEditUser from './ModalEditUser'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModalDeleteUser from './ModalDeleteUser'
-import { green } from '@mui/material/colors';
-import Icon from '@mui/material/Icon';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 const UserList: React.FC = () => {
     const [users, setUsers] = useState<UserType[]>([])
