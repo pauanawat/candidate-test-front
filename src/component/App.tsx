@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <ScrollToTop />
       <Container>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<FeedList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/feeds" element={<FeedList />} />
           <Route path="/users" element={<UserList />} />
