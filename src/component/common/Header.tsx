@@ -1,37 +1,34 @@
 // UserList.tsx
 import React, { useEffect } from 'react'
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Button, Box, Typography } from '@mui/material'
-import { AppState } from '../../store/rootReducer'
-import { ThunkDispatch } from 'redux-thunk'
-import { AppActions } from '../../store/type'
-import { connect } from 'react-redux'
+import { AuthState } from '../../store/auth/authType'
 import { logout } from '../../store/auth/authAction'
 import HomeIcon from '@mui/icons-material/Home'
+import { connect } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit'
 
-const mapState = (state: AppState) => ({
-    auth: state.authReducer,
-})
+const mapStateToProps = (state: AuthState) => ({
+    auth: state, // Adjust accordingly to your actual state structure
+});
 
-const mapDispatch = (dispatch: ThunkDispatch<AppState, {}, AppActions>) => ({
-    logout: () => dispatch(logout())
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    logout: () => dispatch(logout()),
+});
 
-const withConnect = connect(mapState, mapDispatch)
+interface AuthComponentProps {
+    auth: AuthState
+    logout: () => void;
+}
 
-type WithConnectProps = ReturnType<typeof mapState> &
-    ReturnType<typeof mapDispatch>
-
-const Header: React.FC<WithConnectProps & RouteComponentProps> = ({
-    ...props
-}) => {
+const Header: React.FC<AuthComponentProps> = ({ auth, logout }) => {
 
     const handleLogout = () => {
-        props.logout()
+        logout()
     }
 
     useEffect(() => {
-    }, [props.auth])
+    }, [auth])
     return (
         <AppBar position="static">
             <Toolbar>
@@ -41,7 +38,7 @@ const Header: React.FC<WithConnectProps & RouteComponentProps> = ({
                         Feed
                     </Button>
                     {
-                        props.auth.isLogin
+                        auth.isLogin
                             ? <>
                                 <Button component={Link} to="/users" color="inherit">
                                     Users
@@ -54,7 +51,7 @@ const Header: React.FC<WithConnectProps & RouteComponentProps> = ({
                 </Typography>
                 <Box sx={{ flex: 1 }} />
                 <Box>
-                    {props.auth.isLogin
+                    {auth.isLogin
                         ? <Button onClick={() => handleLogout()} component={Link} to="/login" color="inherit">
                             Logout
                         </Button>
@@ -68,4 +65,4 @@ const Header: React.FC<WithConnectProps & RouteComponentProps> = ({
     )
 }
 
-export default withRouter(withConnect(Header))
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

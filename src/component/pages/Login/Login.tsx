@@ -1,31 +1,46 @@
 import React, { useState } from 'react'
 import { Button, TextField, Typography, Container, CssBaseline } from '@mui/material'
 import './Login.css'
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
 import { login } from '../../../store/auth/authAction';
-import { selectTokenData } from '../../../store/auth/authSelector';
+import { Dispatch } from '@reduxjs/toolkit';
+import { AuthState } from '../../../store/auth/authType'
+
+interface AuthComponentProps {
+    auth: AuthState
+    login: (email: string, password: string) => void;
+}
+interface DispatchProps {
+    login: (email: string, password: string) => void;
+}
+const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
+    login: (email, password) => dispatch(login(email, password)),
+});
+const mapStateToProps = (state: AuthState) => ({
+    auth: state, // Adjust accordingly to your actual state structure
+});
 export interface LoginValues {
     email: string
     password: string
 }
 
-const Login: React.FC = () => {
-    const history = useHistory()
+const Login: React.FC<AuthComponentProps> = ({ auth, login }) => {
+    const nevigate = useNavigate()
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const dispatch = useDispatch()
-    const token = useSelector(selectTokenData)
 
     const handleLogin = async () => {
         console.log("handleLogin")
-        dispatch(login(username, password));
+        login(username, password);
 
     };
 
-    if (token) {
-        history.push('/users')
+    if (auth.token) {
+        nevigate('/users')
     }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -69,4 +84,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

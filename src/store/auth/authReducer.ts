@@ -1,12 +1,14 @@
-import { Reducer } from 'redux'
-import {
-  AuthActionType,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  AuthState,
-} from './authType'
+// authSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface AuthState {
+  token: string | null;
+  userId: number | null;
+  isLoading: boolean;
+  errors: object | null;
+  isReady: boolean;
+  isLogin: boolean;
+}
 
 const initialState: AuthState = {
   token: null,
@@ -14,40 +16,38 @@ const initialState: AuthState = {
   errors: null,
   isLoading: false,
   isReady: false,
-  isLogin: false
-}
+  isLogin: false,
+};
 
-// export const authReducer: Reducer<AuthState> = (
-export const authReducer = (
-  state = initialState,
-  action: AuthActionType
-) => {
-  switch (action.type) {
-    case LOGIN_REQUEST:
-      return { ...initialState, isLoading: true, isReady: false, isSuccessConfrim: false }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        token: action.payload?.token || null,
-        userId: action.payload?.userId || null,
-        errors: null,
-        isReady: true,
-        isLogin: true
-      }
-    case LOGIN_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        errors: action.payload,
-        role: null,
-        token: null,
-        isReady: true,
-        isLogin: false
-      }
-    case LOGOUT:
-      return { ...initialState, isReady: true, isLogin: false }
-    default:
-      return state
-  }
-}
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    loginRequest: (state) => {
+      state.isLoading = true;
+      state.isReady = false;
+    },
+    loginSuccess: (state, action: PayloadAction<{ token: string | null; userId: number | null }>) => {
+      state.isLoading = false;
+      state.token = action.payload.token;
+      state.userId = action.payload.userId;
+      state.errors = null;
+      state.isReady = true;
+      state.isLogin = true;
+    },
+    loginFail: (state, action: PayloadAction<object>) => {
+      state.isLoading = false;
+      state.errors = action.payload;
+      state.token = null;
+      state.isReady = true;
+      state.isLogin = false;
+    },
+    logoutr: (state) => {
+      state = { ...initialState, isReady: true, isLogin: false };
+    },
+  },
+});
+
+export const { loginRequest, loginSuccess, loginFail, logoutr } = authSlice.actions;
+
+export default authSlice.reducer;

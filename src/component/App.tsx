@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  Route,
-  Switch
-} from 'react-router-dom'
-import { StickyContainer } from 'react-sticky'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ScrollToTop from './ScrollToTop';
 import Header from './common/Header';
@@ -12,42 +8,24 @@ import UserList from './pages/UserList/UserList';
 import Login from './pages/Login/Login';
 import PostList from './pages/PostList/PostList';
 import { Container } from '@mui/material';
-import { AppState } from '../store/rootReducer';
-import { connect } from 'react-redux';
 import FeedList from './pages/Feed/FeedList';
 
-const mapState = (state: AppState) => ({
-  auth: state.authReducer
-})
-
-const withConnect = connect(mapState)
-
-type WithConnectProps = ReturnType<typeof mapState>
-
-const App: React.FC<WithConnectProps> = (props) => {
+const App: React.FC = () => {
   return (
-    <Switch>
-      <Route
-        render={() => (
-          <StickyContainer>
-            <div className="App">
-              <Header />
-              <ScrollToTop />
-              <Container className='body'>
-                <Switch>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/feeds" component={FeedList} />
-                  <Route exact path="/users" component={UserList} />
-                  <Route exact path="/posts" component={PostList} />
-                </Switch>
-              </Container>
-            </div>
-          </StickyContainer>
-        )}
-      />
-    </Switch>
+    <Router>
+      <Header />
+      <ScrollToTop />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/feeds" element={<FeedList />} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/posts" element={<PostList />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 
-export default withConnect(App);
+export default App;
