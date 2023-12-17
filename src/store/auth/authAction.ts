@@ -1,39 +1,25 @@
-import { Dispatch } from 'redux'
-import {
-  LOGIN_REQUEST,
-  AuthActionType,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-} from './authType'
-import { auth } from '../../apis/api'
-import { localName } from '../../const/constant'
-import { AppActions } from '../type'
+// authAction.ts
+import { auth } from '../../apis/api';
+import { localName } from '../../const/constant';
+import { loginRequest, loginSuccess, loginFail, logoutr } from './authReducer';
+import { AppThunk } from '../store';
 
-export function login(email: string, password: string) {
-  return async (dispatch: Dispatch<AuthActionType>) => {
-    dispatch({ type: LOGIN_REQUEST })
-    try {
-      let res = await auth.login(email, password)
+export const login = (email: string, password: string): AppThunk => async (dispatch) => {
+  dispatch(loginRequest());
+  try {
+    let res = await auth.login(email, password);
 
-      const token = res.data.token
+    const token = res.data.token;
 
-      localStorage.setItem(localName.ACCESSTOKEN, token)
+    localStorage.setItem(localName.ACCESSTOKEN, token);
 
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: { token, userId:res.data.userId }
-      })
-    } catch (err: any) {
-      dispatch({ type: LOGIN_FAIL, payload: err })
-    }
+    dispatch(loginSuccess({ token, userId: res.data.userId }));
+  } catch (err: any) {
+    dispatch(loginFail(err));
   }
-}
+};
 
-export function logout() {
-  return (dispatch: Dispatch<AppActions>) => {
-    localStorage.removeItem(localName.ACCESSTOKEN)
-    // message.success('ออกจากระบบเรียบร้อยแล้ว')
-    dispatch({ type: LOGOUT })
-  }
-}
+export const logout = (): AppThunk => (dispatch) => {
+  localStorage.removeItem(localName.ACCESSTOKEN);
+  dispatch(logoutr());
+};
