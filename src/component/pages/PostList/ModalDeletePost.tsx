@@ -1,6 +1,6 @@
 // UserList.tsx
 import React from 'react'
-import { user } from '../../../apis/api' // Import your authentication API instance
+import { post } from '../../../apis/api' // Import your authentication API instance
 import {
     Dialog,
     DialogTitle,
@@ -21,7 +21,7 @@ const ModalDeleteUser: React.FC<dataProps> = ({ data, onClose }) => {
 
     const deleteUser = async () => {
         if (data && data.id) {
-            user.deleteUser(data.id).then((res) => {
+            post.deletePost(data.id).then((res) => {
                 if (res.data.message == "success") {
                     onClose()
                 }
