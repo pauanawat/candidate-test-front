@@ -13,7 +13,7 @@ Before you begin, ensure you have Node.js and npm installed on your machine.
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/candidate-test-frontend.git
+   git clone https://github.com/pauanawat/candidate-test-front.git
 
 2. Navigate to the project directory:
 
