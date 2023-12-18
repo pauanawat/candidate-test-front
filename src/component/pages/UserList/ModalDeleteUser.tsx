@@ -22,7 +22,7 @@ const ModalDeleteUser: React.FC<dataProps> = ({ data, onClose }) => {
     const deleteUser = async () => {
         if (data && data.id) {
             user.deleteUser(data.id).then((res) => {
-                if (res.data.message == "success") {
+                if (res.status === 200) {
                     onClose()
                 }
             })

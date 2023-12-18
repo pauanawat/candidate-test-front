@@ -36,7 +36,7 @@ export const user = {
     query = data.name ? query + "name=" + data.name : query
     query = query.length && data.phone ? query + "&" : query
     query = data.phone ? query + "phone=" + data.phone : query
-    if (query.length == 1) query = ""
+    if (query.length === 1) query = ""
     console.log(query)
     return authApi.get('/users' + query)
   },
@@ -60,7 +60,7 @@ export const post = {
     query = data.title ? query + "title=" + data.title : query
     query = query.length && data.body ? query + "&" : query
     query = data.body ? query + "body=" + data.body : query
-    if (query.length == 1) query = ""
+    if (query.length === 1) query = ""
     console.log(query)
     return authApi.get('/posts' + query)
   },

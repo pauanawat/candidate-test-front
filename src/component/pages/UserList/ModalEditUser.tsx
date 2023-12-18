@@ -152,7 +152,7 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
             try {
                 if (id)
                     await user.updateUser(id, payload).then((res) => {
-                        if (res.data.message == "success") {
+                        if (res.status === 200) {
                             onClose()
                         }
                         else
@@ -161,7 +161,7 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
                 else {
                     payload['password'] = password
                     await user.createUser(payload).then((res) => {
-                        if (res.data.message == "success") {
+                        if (res.status === 201) {
                             onClose()
                         }
                         else

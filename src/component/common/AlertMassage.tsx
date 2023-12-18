@@ -25,7 +25,7 @@ const AlertMassage: FC<dataProps> = ({ message, status }) => {
           "aria-describedby": "message-id"
         }}
       >
-        <Alert onClose={handleClose} severity={status == responseStatus.SUCCESS ? "success" : "error"} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity={status === responseStatus.SUCCESS ? "success" : "error"} sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>

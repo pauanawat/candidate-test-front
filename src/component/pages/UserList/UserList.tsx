@@ -33,8 +33,8 @@ const UserList: React.FC = () => {
             if (filterName) payload["name"] = filterName
             if (filterPhone) payload["phone"] = filterPhone
             const response = await user.getUser(payload)
-            if (response.status == 200)
-                setUsers(response.data.result)
+            if (response.status === 200)
+                setUsers(response.data.data)
 
         } catch (error) {
             console.error('Error fetching users:', error)

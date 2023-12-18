@@ -21,8 +21,8 @@ const FeedList: React.FC = () => {
     const fetchFeed = async () => {
         try {
             const response = await feed.getFeedList()
-            if (response.status == 200)
-                setFeeds(response.data.feeds)
+            if (response.status === 200)
+                setFeeds(response.data.data)
 
         } catch (error) {
             console.error('Error fetching feeds:', error)
@@ -31,8 +31,8 @@ const FeedList: React.FC = () => {
     const fetchUsers = async () => {
         try {
             const response = await user.getAllUser()
-            if (response.status == 200)
-                setUsers(response.data.users)
+            if (response.status === 200)
+                setUsers(response.data.data)
 
         } catch (error) {
             console.error('Error fetching users:', error)
@@ -42,8 +42,8 @@ const FeedList: React.FC = () => {
         try {
             if (selectedUserId) {
                 const response = await feed.getFeedList(selectedUserId)
-                if (response.status == 200)
-                    setFeeds(response.data.feeds)
+                if (response.status === 200)
+                    setFeeds(response.data.data)
             }
         } catch (error) {
             console.error('Error select feeds:', error)

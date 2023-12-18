@@ -70,7 +70,7 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
             try {
                 if (id)
                     await post.updatePost(id, payload).then((res) => {
-                        if (res.data.message === "success") {
+                        if (res.status === 200) {
                             onClose()
                         }
                         else
@@ -79,7 +79,7 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
                 else {
                     payload['userId'] = userId
                     await post.createPost(payload).then((res) => {
-                        if (res.data.message === "success") {
+                        if (res.status === 201) {
                             onClose()
                         }
                         else

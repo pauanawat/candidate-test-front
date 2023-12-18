@@ -32,8 +32,8 @@ const PostList: React.FC = () => {
             if (filterTitle) payload["title"] = filterTitle
             if (filterBody) payload["body"] = filterBody
             const response = await post.getPost(payload)
-            if (response.status == 200)
-                setPost(response.data.posts)
+            if (response.status === 200)
+                setPost(response.data.data)
 
         } catch (error) {
             console.error('Error fetching posts:', error)
