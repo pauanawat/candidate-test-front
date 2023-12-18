@@ -43,7 +43,12 @@ const authSlice = createSlice({
       state.isLogin = false;
     },
     logoutr: (state) => {
-      state = { ...initialState, isReady: true, isLogin: false };
+      state.isLoading = false;
+      state.token = null;
+      state.userId = null;
+      state.errors = null;
+      state.isReady = true;
+      state.isLogin = false;
     },
   },
 });

@@ -24,8 +24,6 @@ export const user = {
     authApi.patch(`/users/${id}`, data),
   deleteUser: (id: number) =>
     authApi.delete(`/users/${id}`),
-  getUserById: (id: number) =>
-    authApi.get(`/users/${id}`),
   getAllUser: () => {
     return basicApi.get('/users/all')
   },
@@ -53,8 +51,6 @@ export const post = {
     authApi.patch(`/posts/${id}`, data),
   deletePost: (id: number) =>
     authApi.delete(`/posts/${id}`),
-  getPostById: (id: number) =>
-    authApi.get(`/posts/${id}`),
   getPost: (data: IPostFilter) => {
     let query = "?"
     query = data.id ? query + "id=" + data.id : query
