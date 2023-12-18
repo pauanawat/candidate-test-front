@@ -25,7 +25,20 @@ Before you begin, ensure you have Node.js and npm installed on your machine.
    ```bash
    npm install
 
-4. Running the App:
+4. Edit api url config :
+
+   - Go to src/const/config.ts.
+   
+   - comment:
+   ```bash
+    //API_URL: 'https://candidate-test-backend-3aaa43f87169.herokuapp.com',
+   ```
+   - uncomment:
+   ```bash
+    API_URL: 'http://localhost:3001'
+   ```
+   
+6. Running the App:
 
    ```bash
    npm start
