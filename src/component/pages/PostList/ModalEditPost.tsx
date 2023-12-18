@@ -106,13 +106,16 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
                         : null
                     }
                     <Grid item xs={id ? 5 : 10}>
-                        <TextField label="UserId" value={userId} onChange={(e) => setUserId(e.target.value === '' ? undefined : parseInt(e.target.value))} fullWidth />
+                        <TextField label="UserId" value={userId} type="number"
+                            onChange={(e) =>
+                                setUserId(e.target.value === '' ? undefined : parseInt(e.target.value))}
+                            fullWidth />
                     </Grid>
-                    <Grid item xs={5}>
-                        <TextField multiline rows={5} label="Title"
+                    <Grid item xs={10}>
+                        <TextField rows={5} label="Title"
                             value={title} onChange={(e) => setTitle(e.target.value)} fullWidth />
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={10}>
                         <TextField multiline rows={5} label="Body"
                             value={body} onChange={(e) => setBody(e.target.value)} fullWidth />
                     </Grid>

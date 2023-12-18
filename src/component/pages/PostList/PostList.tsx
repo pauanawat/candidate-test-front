@@ -83,6 +83,7 @@ const PostList: React.FC = () => {
                     <TextField
                         fullWidth
                         label="Search by UserId"
+                        type="number"
                         value={filterUserId}
                         onChange={(e) => setFilterUserId(e.target.value === '' ? null : parseInt(e.target.value))}
                     />
