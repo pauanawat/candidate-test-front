@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import "./UserList.css"
 import { UserType } from '../../../store/user/userType'
+import AlertMassage from '../../common/AlertMassage'
 
 interface dataProps {
     data: UserType | undefined
@@ -21,11 +22,17 @@ const ModalDeleteUser: React.FC<dataProps> = ({ data, onClose }) => {
 
     const deleteUser = async () => {
         if (data && data.id) {
-            user.deleteUser(data.id).then((res) => {
-                if (res.status === 200) {
-                    onClose()
-                }
-            })
+            try {
+                user.deleteUser(data.id).then((res) => {
+                    if (res.status === 200) {
+                        onClose()
+                    } else {
+                        return <AlertMassage message={"Failed to delete data"} status={res.status} />
+                    }
+                })
+            } catch (error) {
+                return <AlertMassage message={"Internal server error"} status={500} />
+            }
         }
     }
 

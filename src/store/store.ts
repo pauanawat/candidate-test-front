@@ -1,9 +1,13 @@
 // store.ts
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authReducer';
+import alertReducer from './alert/alertReducer';
 
 const store = configureStore({
-  reducer: authReducer,
+  reducer: {
+    auth: authReducer,
+    alert: alertReducer
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });
 

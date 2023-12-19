@@ -13,16 +13,16 @@ import {
 import "./UserList.css"
 import { UpdateUserType, UserType } from '../../../store/user/userType'
 import AlertMassage from '../../common/AlertMassage'
-import { responseStatus } from '../../../const/constant'
 
 interface dataProps {
     title: string
     data: UserType | undefined
     isOpen?: boolean
+    type: string
     onClose: () => void
 }
 
-const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) => {
+const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, type, onClose }) => {
     const [id, setId] = useState<number | undefined>()
     const [name, setName] = useState<string | undefined>()
     const [username, setUsername] = useState<string | undefined>()
@@ -40,27 +40,29 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
     const [catchPhrase, setCatchPhrase] = useState<string | undefined>()
     const [bs, setBs] = useState<string | undefined>()
     const [disableSaveBtn, setDisableSaveBtn] = useState<boolean>(false)
-    const [status, setStatus] = useState<string>()
+
+    const resetState = () => {
+        setId(undefined);
+        setName(undefined);
+        setUsername(undefined);
+        setPassword(undefined);
+        setEmail(undefined);
+        setPhone(undefined);
+        setWebsite(undefined);
+        setStreet(undefined);
+        setSuite(undefined);
+        setCity(undefined);
+        setZipcode(undefined);
+        setGeoLat(undefined);
+        setGeoLng(undefined);
+        setCompanyName(undefined);
+        setCatchPhrase(undefined);
+        setBs(undefined);
+    };
 
     useEffect(() => {
-        setStatus(undefined)
-        if (isOpen) {
-            setId(undefined)
-            setName(undefined)
-            setUsername(undefined)
-            setPassword(undefined)
-            setEmail(undefined)
-            setPhone(undefined)
-            setWebsite(undefined)
-            setStreet(undefined)
-            setSuite(undefined)
-            setCity(undefined)
-            setZipcode(undefined)
-            setGeoLat(undefined)
-            setGeoLng(undefined)
-            setCompanyName(undefined)
-            setCatchPhrase(undefined)
-            setBs(undefined)
+        if (type === "create") {
+            resetState()
         } else if (data) {
             setId(data.id)
             setName(data.name || '')
@@ -79,7 +81,7 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
             setCatchPhrase(data.company?.catchPhrase || '')
             setBs(data.company?.bs || '')
         }
-    }, [data, isOpen])
+    }, [data, isOpen, type])
 
     useEffect(() => {
         if ((!!id || !!isOpen) &&
@@ -117,8 +119,6 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
         bs,
     ])
     const editUser = async () => {
-        // let param:UserType = {}
-        console.log("edit user")
         if ((!!id || !!password) &&
             !!name &&
             !!username &&
@@ -156,7 +156,7 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
                             onClose()
                         }
                         else
-                            setStatus(responseStatus.ERROR)
+                            return <AlertMassage message={"Failed to update data"} status={res.status} />
                     })
                 else {
                     payload['password'] = password
@@ -165,19 +165,17 @@ const ModalEditUser: React.FC<dataProps> = ({ title, data, isOpen, onClose }) =>
                             onClose()
                         }
                         else
-                            setStatus(responseStatus.ERROR)
+                            return <AlertMassage message={"Failed to craete data"} status={res.status} />
                     })
                 }
             } catch (error) {
-                console.log(error)
-                setStatus(responseStatus.ERROR)
+                return <AlertMassage message={"Internal server error"} status={500} />
             }
         }
     }
 
     return (
-        <Dialog open={!!data || !!isOpen} onClose={onClose} maxWidth="md" fullWidth>
-            {status ? <AlertMassage message={status} status={status} /> : null}
+        <Dialog key={type} open={!!data || !!isOpen} onClose={onClose} maxWidth="md" fullWidth>
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
                 <Grid container spacing={3} columns={10} style={{ marginTop: "1px" }}>

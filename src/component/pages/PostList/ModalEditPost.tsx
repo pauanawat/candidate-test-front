@@ -74,7 +74,7 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
                             onClose()
                         }
                         else
-                            setStatus(responseStatus.ERROR)
+                            return <AlertMassage message={"Failed to update data"} status={res.status} />
                     })
                 else {
                     payload['userId'] = userId
@@ -83,19 +83,18 @@ const ModalEditUser: React.FC<dataProps> = ({ titlePage, data, isOpen, onClose }
                             onClose()
                         }
                         else
-                            setStatus(responseStatus.ERROR)
+                            return <AlertMassage message={"Failed to create data"} status={res.status} />
                     })
                 }
             } catch (error) {
                 console.log(error)
-                setStatus(responseStatus.ERROR)
+                return <AlertMassage message={"Internal server error"} status={500} />
             }
         }
     }
 
     return (
         <Dialog open={!!data || !!isOpen} onClose={onClose} maxWidth="md" fullWidth>
-            {status ? <AlertMassage message={status} status={status} /> : null}
             <DialogTitle>{titlePage}</DialogTitle>
             <DialogContent>
                 <Grid container spacing={3} columns={10} style={{ marginTop: "1px" }}>

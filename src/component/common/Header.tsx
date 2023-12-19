@@ -2,13 +2,13 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Button, Box, Typography } from '@mui/material'
-import { AuthState } from '../../store/auth/authType'
 import { logout } from '../../store/auth/authAction'
 import HomeIcon from '@mui/icons-material/Home'
 import { connect } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit'
+import { RootState } from '../../store/store'
 
-const mapStateToProps = (state: AuthState) => ({
+const mapStateToProps = (state: RootState) => ({
     auth: state, // Adjust accordingly to your actual state structure
 });
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
 });
 
 interface AuthComponentProps {
-    auth: AuthState
+    auth: RootState
     logout: () => void;
 }
 
@@ -29,6 +29,7 @@ const Header: React.FC<AuthComponentProps> = ({ auth, logout }) => {
 
     useEffect(() => {
     }, [auth])
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -38,7 +39,7 @@ const Header: React.FC<AuthComponentProps> = ({ auth, logout }) => {
                         Feed
                     </Button>
                     {
-                        auth.isLogin
+                        auth.auth.isLogin
                             ? <>
                                 <Button component={Link} to="/users" color="inherit">
                                     Users
@@ -51,7 +52,7 @@ const Header: React.FC<AuthComponentProps> = ({ auth, logout }) => {
                 </Typography>
                 <Box sx={{ flex: 1 }} />
                 <Box>
-                    {auth.isLogin
+                    {auth.auth.isLogin
                         ? <Button onClick={() => handleLogout()} component={Link} to="/login" color="inherit">
                             Logout
                         </Button>

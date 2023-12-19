@@ -19,7 +19,7 @@ export const basicApi: AxiosInstance = Axios.create({
 })
 authApi.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem(localName.ACCESSTOKEN);
+    const token = localStorage.getItem(localName.ACCESS_TOKEN);
     if (!!token) {
       config.headers.set("Authorization", 'Bearer ' + token);
     }

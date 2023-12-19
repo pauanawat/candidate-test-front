@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import "./PostList.css"
 import { IPost } from '../../../store/post/postType'
+import AlertMassage from '../../common/AlertMassage'
 
 interface dataProps {
     data: IPost | undefined
@@ -21,11 +22,17 @@ const ModalDeleteUser: React.FC<dataProps> = ({ data, onClose }) => {
 
     const deleteUser = async () => {
         if (data && data.id) {
-            post.deletePost(data.id).then((res) => {
-                if (res.status === 200) {
-                    onClose()
-                }
-            })
+            try {
+                post.deletePost(data.id).then((res) => {
+                    if (res.status === 200) {
+                        onClose()
+                    } else {
+                        return <AlertMassage message={"Failed to delete data"} status={400} />
+                    }
+                })
+            } catch (error) {
+                return <AlertMassage message={"Internal server error"} status={500} />
+            }
         }
     }
 

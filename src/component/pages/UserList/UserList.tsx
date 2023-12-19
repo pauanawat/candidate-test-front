@@ -1,5 +1,5 @@
 // UserList.tsx
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { user } from '../../../apis/api' // Import your authentication API instance
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container,
@@ -14,6 +14,7 @@ import { IUserFilter, UserType } from '../../../store/user/userType'
 import ModalEditUser from './ModalEditUser'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModalDeleteUser from './ModalDeleteUser'
+import AlertMassage from '../../common/AlertMassage'
 
 const UserList: React.FC = () => {
     const [users, setUsers] = useState<UserType[]>([])
@@ -35,9 +36,12 @@ const UserList: React.FC = () => {
             const response = await user.getUser(payload)
             if (response.status === 200)
                 setUsers(response.data.data)
+            else
+                return <AlertMassage message={"Failed to delete data"} status={400} />
 
         } catch (error) {
             console.error('Error fetching users:', error)
+            return <AlertMassage message={"Internal server error"} status={500} />
         }
     }
 
@@ -47,7 +51,9 @@ const UserList: React.FC = () => {
     }
 
     const handleCloseModal = () => {
+        console.log("close")
         fetchUsers()
+        setOpenModalCreate(false)
         setSelectedUser(undefined)
     }
     const handleOpenModalCreate = () => {
@@ -56,6 +62,7 @@ const UserList: React.FC = () => {
     }
 
     const handleCloseModalCreate = () => {
+        console.log("close create")
         setOpenModalCreate(false)
         fetchUsers()
         setSelectedUser(undefined)
@@ -153,8 +160,8 @@ const UserList: React.FC = () => {
                 </TableContainer>
             </div>
             {openModalCreate && !selectedUser
-                ? <ModalEditUser title="Add User" data={selectedUser} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
-                : <ModalEditUser title="Edit User Profile" isOpen={openModalCreate} data={selectedUser} onClose={handleCloseModal} />
+                ? <ModalEditUser key="create" type="create" title="Add User" data={selectedUser} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
+                : <ModalEditUser key="update" type="update" title="Edit User Profile" isOpen={openModalCreate} data={selectedUser} onClose={handleCloseModal} />
             }
             <ModalDeleteUser data={selectedUserDelete} onClose={handleCloseModalDelete} />
         </Container>

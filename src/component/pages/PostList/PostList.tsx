@@ -150,8 +150,8 @@ const PostList: React.FC = () => {
                 </TableContainer>
             </div>
             {openModalCreate && !selectedPost
-                ? <ModalEditPost titlePage="Add Post" data={selectedPost} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
-                : <ModalEditPost titlePage="Edit Post Profile" isOpen={openModalCreate} data={selectedPost} onClose={handleCloseModal} />
+                ? <ModalEditPost key="create" titlePage="Add Post" data={selectedPost} isOpen={openModalCreate} onClose={handleCloseModalCreate} />
+                : <ModalEditPost key="update" titlePage="Edit Post Profile" isOpen={openModalCreate} data={selectedPost} onClose={handleCloseModal} />
             }
             <ModalDeletePost data={selectedPostDelete} onClose={handleCloseModalDelete} />
         </Container>
