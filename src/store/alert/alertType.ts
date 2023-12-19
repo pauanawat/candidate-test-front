@@ -4,9 +4,9 @@ export const HIDE_ALERT = 'HIDE_ALERT'
 interface ShowAlertAction {
   type: typeof SHOW_ALERT
   payload: null | {
-    open: boolean;
-    message: string;
-    status: number;
+    open: boolean
+    message: string
+    status: number
   }
 }
 
@@ -15,9 +15,9 @@ interface HidtAlertAction {
 }
 
 export interface AlertState {
-  open: boolean;
-  message: string;
-  status: number;
+  open: boolean
+  message: string
+  status: number
 }
 
 export type AlertActionType =

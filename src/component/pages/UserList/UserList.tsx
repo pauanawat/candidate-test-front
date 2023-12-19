@@ -1,6 +1,5 @@
-// UserList.tsx
 import React, { useState } from 'react'
-import { user } from '../../../apis/api' // Import your authentication API instance
+import { user } from '../../../apis/api'
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container,
     Button,

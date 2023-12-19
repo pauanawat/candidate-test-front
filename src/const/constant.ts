@@ -3,6 +3,6 @@ export const localName = {
 };
 export const responseStatus = {
   SUCCESS: 200,
-  CREATE_SUCCESS: 200,
+  CREATE_SUCCESS: 201,
   ERROR: 400
 }

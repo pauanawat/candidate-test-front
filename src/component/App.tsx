@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import './App.css';
-import ScrollToTop from './ScrollToTop';
-import Header from './common/Header';
-import UserList from './pages/UserList/UserList';
-import Login from './pages/Login/Login';
-import PostList from './pages/PostList/PostList';
-import { Container } from '@mui/material';
-import FeedList from './pages/Feed/FeedList';
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import './App.css'
+import ScrollToTop from './ScrollToTop'
+import Header from './common/Header'
+import UserList from './pages/UserList/UserList'
+import Login from './pages/Login/Login'
+import PostList from './pages/PostList/PostList'
+import { Container } from '@mui/material'
+import FeedList from './pages/Feed/FeedList'
 import ProtectedRoute from './common/ProtectedRoute '
 
 const App: React.FC = () => {
@@ -28,7 +28,7 @@ const App: React.FC = () => {
         </Routes>
       </Container>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Container, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import FeedCard from './FeedCard';
-import { IFeed } from '../../../store/post/postType';
-import { feed, user } from '../../../apis/api';
+import { Container, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import FeedCard from './FeedCard'
+import { IFeed } from '../../../store/post/postType'
+import { feed, user } from '../../../apis/api'
+
 const FeedList: React.FC = () => {
-    const [feeds, setFeeds] = useState<IFeed[]>([]);
-    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [feeds, setFeeds] = useState<IFeed[]>([])
+    const [selectedUserId, setSelectedUserId] = useState(null)
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -50,8 +51,8 @@ const FeedList: React.FC = () => {
         }
     }
     const handleUserChange = (event: any) => {
-        setSelectedUserId(event.target.value);
-    };
+        setSelectedUserId(event.target.value)
+    }
 
     return (
         <Container>
@@ -65,7 +66,7 @@ const FeedList: React.FC = () => {
                         value={selectedUserId}
                         onChange={handleUserChange}
                     >
-                        {users && users.map((user: { id: any; name: any; }) => (
+                        {users && users.map((user: { id: any; name: any }) => (
                             <MenuItem key={user.id} value={user.id}>
                                 {user.name}
                             </MenuItem>
@@ -81,7 +82,7 @@ const FeedList: React.FC = () => {
                 ))}
             </Grid>
         </Container >
-    );
-};
+    )
+}
 
-export default FeedList;
+export default FeedList

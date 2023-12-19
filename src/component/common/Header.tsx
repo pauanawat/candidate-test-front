@@ -1,24 +1,23 @@
-// UserList.tsx
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Button, Box, Typography } from '@mui/material'
 import { logout } from '../../store/auth/authAction'
 import HomeIcon from '@mui/icons-material/Home'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { Dispatch } from '@reduxjs/toolkit'
 import { RootState } from '../../store/store'
 
 const mapStateToProps = (state: RootState) => ({
-    auth: state, // Adjust accordingly to your actual state structure
-});
+    auth: state,
+})
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     logout: () => dispatch(logout()),
-});
+})
 
 interface AuthComponentProps {
     auth: RootState
-    logout: () => void;
+    logout: () => void
 }
 
 const Header: React.FC<AuthComponentProps> = ({ auth, logout }) => {

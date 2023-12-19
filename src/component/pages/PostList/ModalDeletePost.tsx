@@ -1,6 +1,5 @@
-// UserList.tsx
 import React from 'react'
-import { post } from '../../../apis/api' // Import your authentication API instance
+import { post } from '../../../apis/api'
 import {
     Dialog,
     DialogTitle,

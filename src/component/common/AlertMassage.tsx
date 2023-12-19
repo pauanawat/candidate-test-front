@@ -1,26 +1,25 @@
-import { Alert, Snackbar } from "@mui/material";
-import React, { Dispatch, FC } from "react";
-import { responseStatus } from "../../const/constant";
-import { connect, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { hideAlert } from "../../store/alert/alertReducer";
+import { Alert, Snackbar } from "@mui/material"
+import React, { Dispatch, FC } from "react"
+import { responseStatus } from "../../const/constant"
+import { connect } from "react-redux"
+import { hideAlert } from "../../store/alert/alertReducer"
 
 interface dataProps {
   message: string,
   status: number,
-  hideAlert?: () => void;
+  hideAlert?: () => void
 }
 interface DispatchProps {
-  hideAlert: () => void;
+  hideAlert: () => void
 }
 const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchProps => ({
   hideAlert: () => dispatch(hideAlert()),
-});
+})
 
 const AlertMassage: FC<dataProps> = ({ message, status, hideAlert }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(true)
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
     if(hideAlert) hideAlert()
   }
 
@@ -48,7 +47,7 @@ const AlertMassage: FC<dataProps> = ({ message, status, hideAlert }) => {
         </Alert>
       </Snackbar>
     </div>
-  );
+  )
 }
 
 export default connect(null, mapDispatchToProps)(AlertMassage)

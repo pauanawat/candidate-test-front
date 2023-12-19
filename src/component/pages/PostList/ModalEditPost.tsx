@@ -1,6 +1,5 @@
-// UserList.tsx
 import React, { useEffect, useState } from 'react'
-import { post } from '../../../apis/api' // Import your authentication API instance
+import { post } from '../../../apis/api'
 import {
     Dialog,
     DialogTitle,
@@ -12,7 +11,6 @@ import {
 } from '@mui/material'
 import "./PostList.css"
 import AlertMassage from '../../common/AlertMassage'
-import { responseStatus } from '../../../const/constant'
 import { IPost, IPostCreate } from '../../../store/post/postType'
 
 interface dataProps {
