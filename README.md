@@ -27,18 +27,32 @@ Before you begin, ensure you have Node.js and npm installed on your machine.
 
 4. Edit api url config :
 
-   - Go to src/const/config.ts.
+   1. Go to src/const/config.ts.
    
-   - comment:
+   2. comment:
    ```bash
     //API_URL: 'https://candidate-test-backend-3aaa43f87169.herokuapp.com',
    ```
-   - uncomment:
+   3. uncomment:
    ```bash
     API_URL: 'http://localhost:3001'
    ```
    
-6. Running the App:
+### Running the App
+
+- Running the App using npm command:
 
    ```bash
    npm start
+
+- Running the App using docker:
+
+   - Build docker image:
+      ```bash
+      docker build -t frontend .
+
+   - Run docker container:
+      ```bash
+      docker run -p 3000:3000 --name frontend frontend
+
+This project will be running in local at [http://localhost:3000](http://localhost:3000)
