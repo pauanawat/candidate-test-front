@@ -20,12 +20,13 @@ const AlertMassage: FC<dataProps> = ({ message, status, hideAlert }) => {
   const [open, setOpen] = React.useState(true)
   const handleClose = () => {
     setOpen(false)
-    if(hideAlert) hideAlert()
+    if (hideAlert) hideAlert()
   }
 
   return (
     <div>
       <Snackbar
+        sx={{ height: "35%" }}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
